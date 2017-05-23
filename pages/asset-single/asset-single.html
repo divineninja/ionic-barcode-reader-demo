@@ -1,0 +1,69 @@
+<!--
+  Generated template for the AssetSingle page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Single ({{ title }})</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-card *ngIf="assets.code === 400">
+		<ion-item>
+			<ion-label>Service Tag</ion-label>
+			<span item-right><strong>{{ assets.result.service_tag}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Asset Tag</ion-label>
+			<span item-right><strong>{{ assets.result.asset_tag}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Type</ion-label>
+			<span item-right><strong>{{ assets.result.type_name}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Model</ion-label>
+			<span item-right><strong>{{ assets.result.model}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Brand</ion-label>
+			<span item-right><strong>{{ assets.result.brand_name}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Floor</ion-label>
+			<span item-right><strong>{{ assets.result.floor }}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Station</ion-label>
+			<span item-right><strong>{{ assets.result.station_no }} </strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Assigned to</ion-label>
+			<span item-right><strong *ngIf="assets.result.employee_id">{{ assets.result.employee_name }}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Department</ion-label>
+			<span item-right><strong>{{ assets.result.department }} </strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Status</ion-label>
+			<span item-right><strong>{{ assets.result.status }} </strong></span>
+		</ion-item>
+		
+	</ion-card>
+</ion-content>
