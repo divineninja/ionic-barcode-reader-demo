@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Dashboard</ion-title>
+	<ion-buttons end>
+	  <button ion-button icon-only (click)="createNewPage()">
+		<ion-icon name="ios-add-circle-outline"></ion-icon>
+	  </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-card *ngIf="brands !== any">
+		<ion-list-header>
+		By Brand
+		</ion-list-header>
+		<ion-item *ngFor="let b of brands" (click)="go_to(b.brand_id, 'brand', b.brand_name, 'brand_id')">
+			<h3 item-left>{{b.brand_name}}</h3>
+			<p item-right>{{b.total}}</p>
+		</ion-item>
+	</ion-card>
+	<ion-card *ngIf="departments !== any">
+		<ion-list-header>
+		By Department
+		</ion-list-header>
+		<ion-item *ngFor="let d of departments" (click)="go_to(d.department_id, 'department', d.department, 'department_id')">
+			<h3 item-left>{{d.department}}</h3>
+			<p item-right>{{d.total}}</p>
+		</ion-item>
+	</ion-card>
+	<ion-card *ngIf="locations !== any">
+		<ion-list-header>
+		By Location
+		</ion-list-header>
+		<ion-item *ngFor="let d of locations" (click)="go_to(d.floor, 'location', d.floor, 'floor')">
+			<h3 item-left>{{d.floor}}</h3>
+			<p item-right>{{d.total}}</p>
+		</ion-item>
+	</ion-card>
+	
+	<ion-card *ngIf="locations === any && locations === any && departments === any">
+		<ion-list-header><h2>Internet connection error</h2></ion-list-header>
+		<ion-item>
+			<small>Please connect to RELX network</small>
+		</ion-item>
+	</ion-card>
+</ion-content>

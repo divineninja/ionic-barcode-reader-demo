@@ -1,0 +1,88 @@
+<!-- 
+Title: Search
+Description: search using text input or barcode using device camera
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Asset - Search</ion-title>
+	<ion-buttons end>
+	  <button ion-button icon-only (click)="showBarcode($event)" (ngModel)="showBarcode" >
+		<ion-icon name="md-barcode"></ion-icon>
+	  </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-searchbar 
+		(ngModel)="searchAsset" 
+		(change)="onInput($event)"
+		ionCancel="onCancel($event)"
+		placeholder="Search Asset">
+	</ion-searchbar>
+	
+	<button outline *ngIf="assets.code === 200" ion-button full color="dark" (click)="goToRegister()">No result for {{ barcodeText }}! Do you want to register? </button>
+	
+	<ion-card *ngIf="barcodeText && assets.code === 400" >
+		<ion-card-content>
+			Result for <strong item-right>{{ barcodeText }}</strong>
+		</ion-card-content>
+	</ion-card>
+	
+	<ion-card *ngIf="assets.code === 400">
+		<ion-item>
+			<ion-label>Service Tag</ion-label>
+			<span item-right><strong>{{ assets.result.service_tag}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Asset Tag</ion-label>
+			<span item-right><strong>{{ assets.result.asset_tag}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Type</ion-label>
+			<span item-right><strong>{{ assets.result.type_name}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Model</ion-label>
+			<span item-right><strong>{{ assets.result.model}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Brand</ion-label>
+			<span item-right><strong>{{ assets.result.brand_name}}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Floor</ion-label>
+			<span item-right><strong>{{ assets.result.floor }}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Station</ion-label>
+			<span item-right><strong>{{ assets.result.station_no }} </strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Assigned to</ion-label>
+			<span item-right><strong *ngIf="assets.result.employee_id">{{ assets.result.employee_name }}</strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Department</ion-label>
+			<span item-right><strong>{{ assets.result.department }} </strong></span>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>Status</ion-label>
+			<span item-right><strong>{{ assets.result.status }} </strong></span>
+		</ion-item>
+		
+	</ion-card>
+</ion-content>
+

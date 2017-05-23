@@ -1,0 +1,68 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, Platform } from 'ionic-angular';
+import { BarcodeScanner, StatusBar } from 'ionic-native';
+import { AssetServices } from '../../providers/asset-services';
+import { ViewController } from 'ionic-angular';
+
+@Component({
+  selector: 'page-search',
+  templateUrl: 'search.html',
+  providers: [AssetServices]
+})
+
+export class search {
+  
+  // define values
+  public assets: any;
+  public assetResult: any;
+  public barcodeText: any;
+  public searchText: string;
+
+  constructor(
+			public navCtrl: NavController, 
+			public navParams: NavParams, 
+			public AssetServices: AssetServices,
+			public platform: Platform, 
+			public viewCtrl: ViewController
+		) {
+			
+	platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+    });
+	
+  }
+  
+  ionViewDidLoad(){
+	// this.AssetServices.load()
+  }
+	
+  onInput(event) {
+    // That's right, we're pushing to ourselves!
+	this.AssetServices.setValue('asset',event.target.value);
+	this.loadAsset();
+  }
+  
+  loadAsset() {
+ 	this.AssetServices.load();
+	this.assets = this.AssetServices.data;
+  }
+  
+  
+  showBarcode(event) {
+	BarcodeScanner.scan({
+		orientation: 'portrait'
+	}).then((barcodeData) => {
+		// Success! Barcode data is here
+		alert(barcodeData.text);
+		this.barcodeText = barcodeData.text
+	
+	}, (err) => {
+		alert(err)
+		// An error occurred
+	});
+  }
+  
+  
+}

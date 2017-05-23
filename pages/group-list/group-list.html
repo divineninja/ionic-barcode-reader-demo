@@ -1,0 +1,29 @@
+<!--
+  Generated template for the GroupList page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ table.toUpperCase() }} ({{ title.toUpperCase() }})</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<ion-card *ngIf="loading">
+		<ion-card-content>
+		<ion-spinner item-center name="crescent"></ion-spinner>	<span item-right> Loading content</span>
+		</ion-card-content>
+	</ion-card>
+	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+	<ion-list>
+		<ion-item *ngFor="let item of assets" (click)="goSingleAsset(item)">
+			{{ item }}
+		</ion-item>
+	</ion-list>
+	
+</ion-content>
